@@ -12,7 +12,7 @@ export const trainingService = {
     return response.data;
   },
 
-  create: async (trainingData: Omit<Training, '_id' | 'createdAt' | 'updatedAt'>): Promise<ApiResponse<Training>> => {
+  create: async (trainingData: Omit<Training, 'id' | 'createdAt' | 'updatedAt'>): Promise<ApiResponse<Training>> => {
     const response = await api.post('/trainings', trainingData);
     return response.data;
   },

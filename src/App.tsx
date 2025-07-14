@@ -13,6 +13,16 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
+import Users from './pages/Users';
+import UserDetail from './pages/UserDetail';
+import UserEdit from './pages/UserEdit';
+import CreateUser from './pages/CreateUser';
+import Departments from './pages/Departments';
+import CreateDepartment from './pages/CreateDepartment';
+import DepartmentDetail from './pages/DepartmentDetail';
+import Trainings from './pages/Trainings';
+import CreateTraining from './pages/CreateTraining';
+import Profile from './pages/Profile';
 
 const AppContent: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -56,7 +66,7 @@ const AppContent: React.FC = () => {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                   <h1 className="text-2xl font-bold text-gray-900 mb-8">My Trainings</h1>
                   <div className="card">
-                    <p className="text-gray-600">My Trainings page - Coming soon!</p>
+                    <Trainings />
                   </div>
                 </div>
               </ProtectedRoute>
@@ -66,12 +76,15 @@ const AppContent: React.FC = () => {
             path="/trainings"
             element={
               <ProtectedRoute allowedRoles={['admin', 'manager']}>
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                  <h1 className="text-2xl font-bold text-gray-900 mb-8">All Trainings</h1>
-                  <div className="card">
-                    <p className="text-gray-600">All Trainings page - Coming soon!</p>
-                  </div>
-                </div>
+                <Trainings />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/trainings/create"
+            element={
+              <ProtectedRoute allowedRoles={['admin', 'manager']}>
+                <CreateTraining />
               </ProtectedRoute>
             }
           />
@@ -92,12 +105,23 @@ const AppContent: React.FC = () => {
             path="/departments"
             element={
               <ProtectedRoute allowedRoles={['admin']}>
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                  <h1 className="text-2xl font-bold text-gray-900 mb-8">Departments</h1>
-                  <div className="card">
-                    <p className="text-gray-600">Departments page - Coming soon!</p>
-                  </div>
-                </div>
+                <Departments />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/departments/create"
+            element={
+              <ProtectedRoute allowedRoles={['admin']}>
+                <CreateDepartment />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/departments/:id"
+            element={
+              <ProtectedRoute allowedRoles={['admin']}>
+                <DepartmentDetail />
               </ProtectedRoute>
             }
           />
@@ -105,12 +129,31 @@ const AppContent: React.FC = () => {
             path="/users"
             element={
               <ProtectedRoute allowedRoles={['admin']}>
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                  <h1 className="text-2xl font-bold text-gray-900 mb-8">Users</h1>
-                  <div className="card">
-                    <p className="text-gray-600">Users page - Coming soon!</p>
-                  </div>
-                </div>
+                <Users />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/users/create"
+            element={
+              <ProtectedRoute allowedRoles={['admin']}>
+                <CreateUser />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/users/:id"
+            element={
+              <ProtectedRoute allowedRoles={['admin']}>
+                <UserDetail />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/users/:id/edit"
+            element={
+              <ProtectedRoute allowedRoles={['admin']}>
+                <UserEdit />
               </ProtectedRoute>
             }
           />
@@ -118,12 +161,7 @@ const AppContent: React.FC = () => {
             path="/profile"
             element={
               <ProtectedRoute>
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                  <h1 className="text-2xl font-bold text-gray-900 mb-8">Profile</h1>
-                  <div className="card">
-                    <p className="text-gray-600">Profile page - Coming soon!</p>
-                  </div>
-                </div>
+                <Profile />
               </ProtectedRoute>
             }
           />

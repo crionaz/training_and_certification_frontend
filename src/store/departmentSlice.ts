@@ -42,7 +42,7 @@ export const fetchDepartmentById = createAsyncThunk(
 
 export const createDepartment = createAsyncThunk(
   'departments/create',
-  async (departmentData: Omit<Department, '_id' | 'createdAt' | 'updatedAt'>, { rejectWithValue }) => {
+  async (departmentData: Omit<Department, 'id' | 'createdAt' | 'updatedAt'>, { rejectWithValue }) => {
     try {
       const response = await departmentService.create(departmentData);
       return response.data;
@@ -135,11 +135,11 @@ const departmentSlice = createSlice({
       })
       .addCase(updateDepartment.fulfilled, (state, action) => {
         state.isLoading = false;
-        const index = state.departments.findIndex(dept => dept._id === action.payload._id);
+        const index = state.departments.findIndex(dept => dept.id === action.payload.id);
         if (index !== -1) {
           state.departments[index] = action.payload;
         }
-        if (state.currentDepartment?._id === action.payload._id) {
+        if (state.currentDepartment?.id === action.payload.id) {
           state.currentDepartment = action.payload;
         }
       })
@@ -154,8 +154,8 @@ const departmentSlice = createSlice({
       })
       .addCase(deleteDepartment.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.departments = state.departments.filter(dept => dept._id !== action.payload);
-        if (state.currentDepartment?._id === action.payload) {
+        state.departments = state.departments.filter(dept => dept.id !== action.payload);
+        if (state.currentDepartment?.id === action.payload) {
           state.currentDepartment = null;
         }
       })

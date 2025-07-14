@@ -12,7 +12,7 @@ export const departmentService = {
     return response.data;
   },
 
-  create: async (departmentData: Omit<Department, '_id' | 'createdAt' | 'updatedAt'>): Promise<ApiResponse<Department>> => {
+  create: async (departmentData: Omit<Department, 'id' | 'createdAt' | 'updatedAt'>): Promise<ApiResponse<Department>> => {
     const response = await api.post('/departments', departmentData);
     return response.data;
   },

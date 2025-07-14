@@ -33,12 +33,12 @@ const Header: React.FC = () => {
               Dashboard
             </Link>
             
-            <Link
+            {(user.role === 'staff' || user.role === 'manager') && <Link
               to="/my-trainings"
               className="text-gray-600 hover:text-primary-600 px-3 py-2 rounded-md text-sm font-medium"
             >
               My Trainings
-            </Link>
+            </Link>}
 
             {(user.role === 'admin' || user.role === 'manager') && (
               <>

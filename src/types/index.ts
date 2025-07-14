@@ -1,5 +1,5 @@
 export interface User {
-  _id: string;
+  id: string;
   empNo: string;
   fullName: string;
   email: string;
@@ -9,14 +9,14 @@ export interface User {
   address: string;
   phone: string;
   dateOfBirth: string;
-  status: 'active' | 'suspended' | 'deleted';
+  status: 'active' | 'locked' | 'close';
   createdAt: string;
   updatedAt: string;
   lastLogin?: string;
 }
 
 export interface Department {
-  _id: string;
+  id: string;
   name: string;
   description: string;
   createdAt: string;
@@ -24,9 +24,9 @@ export interface Department {
 }
 
 export interface Training {
-  _id: string;
+  id: string;
   trainingName: string;
-  department: string;
+  department: string | Department;
   content: string;
   lastDate: string;
   users: string[];
@@ -35,7 +35,7 @@ export interface Training {
 }
 
 export interface UserTraining {
-  _id: string;
+  id: string;
   userId: string;
   trainingId: string;
   content: string;
@@ -46,7 +46,7 @@ export interface UserTraining {
 }
 
 export interface Certification {
-  _id: string;
+  id: string;
   userId: string;
   trainingId: string;
   description?: string;
@@ -55,7 +55,7 @@ export interface Certification {
 }
 
 export interface Notification {
-  _id: string;
+  id: string;
   users: string[];
   event: 'assignments' | 'compliance' | 'completion';
   description: string;
@@ -107,4 +107,43 @@ export interface ComplianceDashboard {
     compliant: number;
     percentage: number;
   }[];
+}
+
+export interface PaginationParams {
+  page?: number;
+  limit?: number;
+  status?: 'active' | 'locked' | 'close';
+  role?: 'staff' | 'manager' | 'admin';
+  search?: string;
+}
+
+export interface PaginatedResponse<T> {
+  data: T[];
+  pagination: {
+    currentPage: number;
+    totalPages: number;
+    totalItems: number;
+    itemsPerPage: number;
+    hasNextPage: boolean;
+    hasPreviousPage: boolean;
+    offset: number;
+  };
+}
+
+export interface Transaction {
+  id: string;
+  userId: string;
+  action: string;
+  details: string;
+  timestamp: string;
+}
+
+export interface AuditLog {
+  id: string;
+  userId: string;
+  action: string;
+  resource: string;
+  details: string;
+  timestamp: string;
+  ipAddress?: string;
 }
